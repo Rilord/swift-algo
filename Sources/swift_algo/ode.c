@@ -40,7 +40,6 @@ ALGO_EXPORT arr *algo_euler(float x0, float y0, float h,  int n,
         float (*equation)(float, float)) {
 
     arr *result;
-
     create_array(n + 1, &result);
 
     for (int i = 0; i <= n; ++i) {
@@ -64,7 +63,7 @@ ALGO_EXPORT arr *algo_runge_kutta(float x0, float y0, float a, float h, int n,
         y0 +=
         h * ((1 - a) * (*equation)(x0, y0) +
         a * (*equation)(x0 + (h / 2.f / a), y0 +
-        h * (*equation)(x0, y0) / 2 / a));
+        h * ((*equation)(x0, y0) / 2.f / a)));
         
         x0 += h;
     }
