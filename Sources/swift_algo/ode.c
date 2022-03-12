@@ -37,7 +37,7 @@ float foapprox(float x) {
 }
 
 ALGO_EXPORT arr *algo_euler(float x0, float y0, float h,  int n,
-        float (*equation)(float, float)) {
+    float (*equation)(float, float)) {
 
     arr *result;
     create_array(n + 1, &result);
@@ -52,8 +52,8 @@ ALGO_EXPORT arr *algo_euler(float x0, float y0, float h,  int n,
 
 }
 
-ALGO_EXPORT arr *algo_runge_kutta(float x0, float y0, float a, float h, int n,
-                                  float (*equation)(float, float)) {
+ALGO_EXPORT arr *algo_runge_kutta(float x0, float y0,
+    float a, float h, int n, float (*equation)(float, float)) {
 
     arr *result;
     create_array(n + 1, &result);
