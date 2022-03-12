@@ -22,7 +22,7 @@ float tapprox(float x) {
     return
             1.f * sapprox(x) +
             2.f * powf(x, 11.f) / 2079.f +
-            powf(x, 15.f) / 59535.f;
+            1.f * powf(x, 15.f) / 59535.f;
 }
 
 float foapprox(float x) {
@@ -41,9 +41,9 @@ ALGO_EXPORT arr *algo_euler(float x0, float y0, float h,  int n,
 
     arr *result;
 
-    create_array(n, &result);
+    create_array(n + 1, &result);
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i <= n; ++i) {
         result->data[i] = y0;
         y0 += h * (*equation)(x0, y0);
         x0 += h;
@@ -57,14 +57,15 @@ ALGO_EXPORT arr *algo_runge_kutta(float x0, float y0, float a, float h, int n,
                                   float (*equation)(float, float)) {
 
     arr *result;
-    create_array(n, &result);
+    create_array(n + 1, &result);
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i <= n; ++i) {
         result->data[i] = y0;
         y0 +=
-                h * ((1 - a) * (*equation)(x0, y0) +
-                     a * (*equation)(x0 + h / 2.f / a, y0 +
-                                                       h * (*equation)(x0, y0) / 2 / a));
+        h * ((1 - a) * (*equation)(x0, y0) +
+        a * (*equation)(x0 + (h / 2.f / a), y0 +
+        h * (*equation)(x0, y0) / 2 / a));
+        
         x0 += h;
     }
 
